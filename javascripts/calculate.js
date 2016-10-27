@@ -349,6 +349,11 @@ var cNames = [
   "Tap Damage"
 ];
 
+var customizationMapping = {};
+for (var k in customizationInfo) {
+  customizationMapping[customizationInfo[k].label] = customizationInfo[k];
+}
+
 var customizationMax = cBonus.map(function(a) { return 0; });
 customizationInfo.forEach(function(c, i) {
   customizationMax[c.type] += c.value;

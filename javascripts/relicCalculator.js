@@ -522,15 +522,17 @@ function fillCustomizations(val) {
     if(val == null) {
         return
     }
-
-    var ownedCusts = val.split(".");
-    for (var type in $scope.allCustomizations) {
-        $scope.allCustomizations[type].forEach(function(c, i) {
-            if(contains(ownedCusts, c.label)) {
-                c.owned = true;
-            }
-        });
-    }
+	
+	String.prototype.replaceAll = function(search, replacement) {
+		var target = this;
+		return target.split(search).join(replacement);
+	};
+	
+    var ownedCusts = val.replaceAll(".", "/");
+	var customizations = parseCustomizations(ownedCusts);
+	for (var c in customizations) {
+        $scope.customizations[c].value = customizations[c];
+	}
 }
 
 function fillMethods(val) {
